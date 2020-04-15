@@ -1,11 +1,16 @@
-let principal = 200000;
-let rate = 0.05;
-let years = 30;
-let periods = years * 12;
-let creditScore = 600;
+const inputPrincipal = document.querySelector("#principal");
+const inputRate = document.querySelector("#rate");
+const inputYears = document.querySelector("#years");
+const inputCredit = document.querySelector("#credit");
+const btnSubmit = document.querySelector("#submit");
+const result = document.querySelector("#result");
+
+let principal;
+let rate;
+let years;
+let periods;
+let creditScore;
 const name = "Drew";
-
-
 
 const mortgageCalculator = (principal, rate, periods, credit) => {
 
@@ -37,9 +42,9 @@ const variableInterestRate = (principal, rate, periods) => {
         rate += .005;
         monthlyInterestRate = rate / 12;
     }
-
-    
 }
 
-console.log(mortgageCalculator(principal, rate, periods, creditScore));
-variableInterestRate(principal, .04, periods);
+btnSubmit.addEventListener("click", function(){
+    principal = Number(inputPrincipal.value);
+    console.log(principal);
+});
