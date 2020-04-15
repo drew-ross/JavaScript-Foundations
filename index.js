@@ -10,6 +10,7 @@ let rate;
 let years;
 let periods;
 let creditScore;
+let payment;
 const name = "Drew";
 
 const mortgageCalculator = (principal, rate, periods, credit) => {
@@ -24,7 +25,7 @@ const mortgageCalculator = (principal, rate, periods, credit) => {
     let numerator = ( monthlyInterestRate * Math.pow((1 + monthlyInterestRate), periods) );
     let denominator = ( Math.pow((1 + monthlyInterestRate), periods) - 1);
     let monthlyRate = ( principal * (numerator / denominator) );
-    return `${name}, your monthly rate is ${monthlyRate} with a credit score of ${credit}`;
+    return monthlyRate;
 }
 
 const variableInterestRate = (principal, rate, periods) => {
@@ -46,5 +47,14 @@ const variableInterestRate = (principal, rate, periods) => {
 
 btnSubmit.addEventListener("click", function(){
     principal = Number(inputPrincipal.value);
-    console.log(principal);
+    rate = .01 * Number(inputRate.value); //User inputs %, must convert to decimal
+    years = Number(inputYears.value);
+    periods = years * 12;
+    creditScore = Number(inputCredit.value);
+
+    payment = mortgageCalculator(principal, rate, periods, creditScore);
+    payment = (100 * Math.round(payment) / 100);
+    
+    if(isNaN(payment)) {payment = 0}
+    result.value = payment;
 });
